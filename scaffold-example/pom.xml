@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-boot-mybatis-scaffold</artifactId>
+        <groupId>com.scaffold</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>scaffold-example</artifactId>
+    <packaging>jar</packaging>
+
+    <name>scaffold-example</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+    </properties>
+
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>com.scaffold</groupId>
+            <artifactId>scaffold-mapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-rsa</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.didispace</groupId>
+            <artifactId>spring-boot-starter-swagger</artifactId>
+            <version>1.2.0.RELEASE</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
+
+        <!--MySQL JDBC驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!--阿里 Druid Spring Boot Starter依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
+        <!-- kaptcha 验证码-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+    <!-- 环境设置 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <active.profile>dev</active.profile>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <active.profile>prod</active.profile>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <active.profile>test</active.profile>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+
+        <plugins>
+            <!-- 添加spring-boot的maven插件 start-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <includeSystemScope>true</includeSystemScope>
+                    <!--fork : 如果没有该项配置，可能devtools不会起作用，即应用不会restart -->
+                    <fork>true</fork>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 添加spring-boot的maven插件 end-->
+        </plugins>
+    </build>
+</project>
