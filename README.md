@@ -37,5 +37,13 @@ springboot脚手架，集成mybatis freemarker security为一体,使用mybatis �
 api服务端脚手架
 拦截/api/**请求,通过header验证请求的合法性,(类似JWT)<br>
 
+### 测试 spring security With Jwtt
+
+直接启动运行 RestApiAppMain 类
+
+访问:[http://localhost:3345](http://localhost:3345)
+
+### 效果提
+
 
 欢迎各位大神来吐槽.

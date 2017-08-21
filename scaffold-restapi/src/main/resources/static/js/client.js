@@ -33,7 +33,7 @@ $(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-                setJwtToken(data.data);
+                setJwtToken(data.result);
                 $login.hide();
                 $notLoggedIn.hide();
                 showTokenInformation();

@@ -5,7 +5,8 @@ package com.scaffold.core.enums;
  */
 public enum ErrorInfoEnum implements ErrorInfo{
 
-    PARAMS_NOT_NULL("000001","params not null");
+    PARAMS_NOT_NULL("000001","params not null"),
+    USER_EXISTS("000002","user already exists");
 
     private String code;
 

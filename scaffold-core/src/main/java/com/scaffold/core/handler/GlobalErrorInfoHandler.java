@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.AccessDeniedException;
 
 /**
  * 统一错误码异常处理
@@ -25,18 +26,19 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalErrorInfoHandler {
 
 
-
     @Value("${scaffold.config.show-exception}")
     private Boolean showException = false;
+
     /**
      * 系统异常处理
+     *
      * @param request
      * @param exception
      * @return
      */
     @ExceptionHandler(value = GlobalErrorInfoException.class)
     public ResultBody errorHandlerOverJson(HttpServletRequest request, GlobalErrorInfoException exception) {
-        if(showException){
+        if (showException) {
             exception.printStackTrace();
         }
         ErrorInfo errorInfo = exception.getErrorInfo();
@@ -46,13 +48,14 @@ public class GlobalErrorInfoHandler {
 
     /**
      * 参数验证失败
+     *
      * @param exception
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultBody handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        if(showException){
+        if (showException) {
             exception.printStackTrace();
         }
         log.error("参数验证失败", exception);
@@ -66,4 +69,39 @@ public class GlobalErrorInfoHandler {
         resultBody.setMessage("参数验证失败:" + message);
         return resultBody;
     }
+
+
+//    /**
+//     * 500 - Internal Server Error
+//     */
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler(Exception.class)
+//    public ResultBody handleException(Exception exception) {
+//        log.error("服务器异常", exception);
+//        if (showException) {
+//            exception.printStackTrace();
+//        }
+//        ResultBody resultBody = new ResultBody();
+//        resultBody.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
+//        resultBody.setMessage("服务器异常");
+//        return resultBody;
+//    }
+//
+//
+//
+//    /**
+//     * 401 - Unauthorized
+//     */
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ResultBody handleException(AccessDeniedException exception) {
+//        log.error("没有访问权限", exception);
+//        if (showException) {
+//            exception.printStackTrace();
+//        }
+//        ResultBody resultBody = new ResultBody();
+//        resultBody.setCode(HttpStatus.UNAUTHORIZED.toString());
+//        resultBody.setMessage("该接口您没有访问权限!");
+//        return resultBody;
+//    }
 }
