@@ -1,8 +1,11 @@
 # spring-boot-mybatis-scaffold
 spring-boot-mybatis-scaffold
 
-springboot脚手架，集成mybatis freemarker security为一体,使用mybatis 通用分页pagehelper. 通用Mapper.
+通用技术选型：
 
+    springboot脚手架，集成mybatis freemarker security为一体,使用mybatis 通用分页pagehelper. 通用Mapper.
+    
+    
 
 集成:
 > * spring-boot-starter-swagger
@@ -44,6 +47,15 @@ api服务端脚手架
 访问:[http://localhost:3345](http://localhost:3345)
 
 ### 效果提
+
+#### 未登录
+![Markdown](http://i4.bvimg.com/607995/ffe926a0c0ac9adf.jpg)
+
+-----
+#### 登录成功
+
+![Markdown](http://i4.bvimg.com/607995/3c99d23bdd0fdf6e.jpg)
+
 
 
 欢迎各位大神来吐槽.
