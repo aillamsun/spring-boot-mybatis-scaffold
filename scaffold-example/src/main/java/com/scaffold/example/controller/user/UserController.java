@@ -4,7 +4,9 @@ import com.scaffold.core.response.ResultBody;
 import com.scaffold.core.response.ResultGenerator;
 import com.scaffold.core.web.controller.BaseCRUDController;
 import com.scaffold.example.service.UserServiceImpl;
+import com.scaffold.mapper.user.UserAuthortyMapper;
 import com.scaffold.model.User;
+import com.scaffold.model.UserAuthorty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,8 @@ public class UserController extends BaseCRUDController<User> {
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private UserAuthortyMapper userAuthortyMapper;
     /**
      * 获取所有用户
      * @return

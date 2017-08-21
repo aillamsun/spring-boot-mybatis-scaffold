@@ -32,6 +32,21 @@ spring-boot-mybatis-scaffold
 
 
 ##scaffold-example
+通用后台脚手架
+
+访问:[http://localhost:3344](http://localhost:3344)
+
+### 效果提
+
+![Markdown](http://i1.bvimg.com/607995/67f078816fa10f83.jpg)
+
+-----
+
+### Swagger-UI
+
+访问:[http://localhost:3344/swagger-ui.html](http://localhost:3344/swagger-ui.html)
+
+![Markdown](http://i1.bvimg.com/607995/e3b97eb44e672909.jpg)
 
 
 
