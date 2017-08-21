@@ -4,6 +4,7 @@ import com.scaffold.core.enums.ErrorInfo;
 import com.scaffold.core.exception.GlobalErrorInfoException;
 import com.scaffold.core.response.ResultBody;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,6 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalErrorInfoHandler {
 
 
+
+    @Value("${scaffold.config.show-exception}")
+    private Boolean showException = false;
     /**
      * 系统异常处理
      * @param request
@@ -32,6 +36,9 @@ public class GlobalErrorInfoHandler {
      */
     @ExceptionHandler(value = GlobalErrorInfoException.class)
     public ResultBody errorHandlerOverJson(HttpServletRequest request, GlobalErrorInfoException exception) {
+        if(showException){
+            exception.printStackTrace();
+        }
         ErrorInfo errorInfo = exception.getErrorInfo();
         ResultBody result = new ResultBody(errorInfo);
         return result;
@@ -39,14 +46,17 @@ public class GlobalErrorInfoHandler {
 
     /**
      * 参数验证失败
-     * @param e
+     * @param exception
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultBody handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("参数验证失败", e);
-        BindingResult result = e.getBindingResult();
+    public ResultBody handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        if(showException){
+            exception.printStackTrace();
+        }
+        log.error("参数验证失败", exception);
+        BindingResult result = exception.getBindingResult();
         FieldError error = result.getFieldError();
         String field = error.getField();
         String code = error.getDefaultMessage();

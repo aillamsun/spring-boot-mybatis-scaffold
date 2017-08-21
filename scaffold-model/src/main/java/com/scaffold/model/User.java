@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by sungang on 2017/8/19.
@@ -28,9 +31,19 @@ public class User extends BaseModel {
     @Column(name = "user_name")
     private String userName;
 
-
     private String password;
 
+    private String email;
+
     private String remark;
+
+    private Boolean enabled;
+
+    @Transient
+    private List<Authority> authorities;
+
+    @Column(name = "last_password_reset_date")
+    @NotNull
+    private Date lastPasswordResetDate;
 
 }
