@@ -36,9 +36,9 @@ spring-boot-mybatis-scaffold
 
 访问:[http://localhost:3344](http://localhost:3344)
 
-### 效果提
+### 效果提（功能暂未实现）
 
-![Markdown](http://i1.bvimg.com/607995/67f078816fa10f83.jpg)
+![Markdown](http://i2.bvimg.com/607995/665f5fe027815230.jpg)
 
 -----
 
@@ -46,7 +46,7 @@ spring-boot-mybatis-scaffold
 
 访问:[http://localhost:3344/swagger-ui.html](http://localhost:3344/swagger-ui.html)
 
-![Markdown](http://i1.bvimg.com/607995/e3b97eb44e672909.jpg)
+![Markdown](http://i2.bvimg.com/607995/241eb08cf9fd7f3e.jpg)
 
 
 
@@ -64,12 +64,12 @@ api服务端脚手架
 ### 效果提
 
 #### 未登录
-![Markdown](http://i4.bvimg.com/607995/ffe926a0c0ac9adf.jpg)
+![Markdown](http://i2.bvimg.com/607995/6c1ed865cb00195f.jpg)
 
 -----
 #### 登录成功
 
-![Markdown](http://i4.bvimg.com/607995/3c99d23bdd0fdf6e.jpg)
+![Markdown](http://i2.bvimg.com/607995/b212c49d89276492.jpg)
 
 
 
