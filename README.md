@@ -36,7 +36,7 @@ spring-boot-mybatis-scaffold
 
 访问:[http://localhost:3344](http://localhost:3344)
 
-### 效果提（功能暂未实现）
+### 效果图（功能暂未实现）
 
 ![Markdown](http://i2.bvimg.com/607995/665f5fe027815230.jpg)
 
@@ -61,7 +61,7 @@ api服务端脚手架
 
 访问:[http://localhost:3345](http://localhost:3345)
 
-### 效果提
+### 效果图
 
 #### 未登录
 ![Markdown](http://i2.bvimg.com/607995/6c1ed865cb00195f.jpg)
