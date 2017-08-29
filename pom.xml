@@ -12,6 +12,7 @@
         <module>scaffold-mapper</module>
         <module>scaffold-model</module>
         <module>scaffold-restapi</module>
+        <module>scaffold-autoconfigures</module>
     </modules>
     <packaging>pom</packaging>
 
