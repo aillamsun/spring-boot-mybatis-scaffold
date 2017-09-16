@@ -1,11 +1,16 @@
 package com.scaffold.core.handler;
 
 import com.scaffold.core.enums.ErrorInfo;
+import com.scaffold.core.enums.GlobalErrorInfoEnum;
 import com.scaffold.core.exception.GlobalErrorInfoException;
 import com.scaffold.core.response.ResultBody;
+import com.scaffold.core.utils.MessageUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,79 +34,46 @@ public class GlobalErrorInfoHandler {
     @Value("${scaffold.config.show-exception}")
     private Boolean showException = false;
 
+    private static Logger logger = LoggerFactory.getLogger(GlobalErrorInfoHandler.class);
+
+
     /**
-     * 系统异常处理
-     *
+     * 全局系统异常
+     * @param request
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResultBody errorHandlerOverJson(HttpServletRequest request, RuntimeException exception) {
+        logger.error("全局异常:", exception.getMessage());
+        ResultBody result = new ResultBody(GlobalErrorInfoEnum.NOT_FOUND);
+        return result;
+    }
+
+
+    /**
+     * GlobalErrorInfoException 系统异常
      * @param request
      * @param exception
      * @return
      */
     @ExceptionHandler(value = GlobalErrorInfoException.class)
-    public ResultBody errorHandlerOverJson(HttpServletRequest request, GlobalErrorInfoException exception) {
-        if (showException) {
-            exception.printStackTrace();
-        }
+    public ResultBody handleGlobalErrorInfoException(HttpServletRequest request, GlobalErrorInfoException exception) {
         ErrorInfo errorInfo = exception.getErrorInfo();
+        getMessage(errorInfo, exception.getArgs());
+        logger.error("错误消息:", errorInfo.toString());
         ResultBody result = new ResultBody(errorInfo);
         return result;
     }
 
-    /**
-     * 参数验证失败
-     *
-     * @param exception
-     * @return
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultBody handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        if (showException) {
-            exception.printStackTrace();
+    private void getMessage(ErrorInfo errorInfo, Object... agrs) {
+        String message = null;
+        if (!StringUtils.isEmpty(errorInfo.getCode())) {
+            message = MessageUtils.message(errorInfo.getCode(), agrs);
         }
-        log.error("参数验证失败", exception);
-        BindingResult result = exception.getBindingResult();
-        FieldError error = result.getFieldError();
-        String field = error.getField();
-        String code = error.getDefaultMessage();
-        String message = String.format("%s:%s", field, code);
-        ResultBody resultBody = new ResultBody();
-        resultBody.setCode(HttpStatus.BAD_REQUEST.toString());
-        resultBody.setMessage("参数验证失败:" + message);
-        return resultBody;
+        if (message == null) {
+            message = errorInfo.getMessage();
+        }
+        errorInfo.setMessage(message);
     }
-
-
-//    /**
-//     * 500 - Internal Server Error
-//     */
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler(Exception.class)
-//    public ResultBody handleException(Exception exception) {
-//        log.error("服务器异常", exception);
-//        if (showException) {
-//            exception.printStackTrace();
-//        }
-//        ResultBody resultBody = new ResultBody();
-//        resultBody.setCode(HttpStatus.INTERNAL_SERVER_ERROR.toString());
-//        resultBody.setMessage("服务器异常");
-//        return resultBody;
-//    }
-//
-//
-//
-//    /**
-//     * 401 - Unauthorized
-//     */
-//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-//    @ExceptionHandler(AccessDeniedException.class)
-//    public ResultBody handleException(AccessDeniedException exception) {
-//        log.error("没有访问权限", exception);
-//        if (showException) {
-//            exception.printStackTrace();
-//        }
-//        ResultBody resultBody = new ResultBody();
-//        resultBody.setCode(HttpStatus.UNAUTHORIZED.toString());
-//        resultBody.setMessage("该接口您没有访问权限!");
-//        return resultBody;
-//    }
 }

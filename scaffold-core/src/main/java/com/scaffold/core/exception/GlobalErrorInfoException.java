@@ -8,9 +8,11 @@ import com.scaffold.core.enums.ErrorInfo;
 public class GlobalErrorInfoException extends Exception {
 
     private ErrorInfo errorInfo;
+    private Object[] args;
 
-    public GlobalErrorInfoException(ErrorInfo errorInfo) {
+    public GlobalErrorInfoException(ErrorInfo errorInfo, Object... agrs) {
         this.errorInfo = errorInfo;
+        this.args = agrs;
     }
 
     public ErrorInfo getErrorInfo() {
@@ -21,4 +23,12 @@ public class GlobalErrorInfoException extends Exception {
         this.errorInfo = errorInfo;
     }
 
+
+    public Object[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(Object[] args) {
+        this.args = args;
+    }
 }

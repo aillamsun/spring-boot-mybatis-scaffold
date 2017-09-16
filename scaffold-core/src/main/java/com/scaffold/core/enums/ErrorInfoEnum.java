@@ -24,4 +24,9 @@ public enum ErrorInfoEnum implements ErrorInfo{
     public String getMessage(){
         return this.message;
     }
+
+    @Override
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
