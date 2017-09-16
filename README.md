@@ -5,7 +5,12 @@ spring-boot-mybatis-scaffold
 
     springboot脚手架，集成mybatis freemarker security为一体,使用mybatis 通用分页pagehelper. 通用Mapper.
     
+
+描述: 
+
+    集成统一异常处理，支持i18n国际化，支持通配符 具体异常处理可以参考
     
+访问:[spring-boot-exception-handler](https://github.com/aillamsun/spring-boot-exception-handler)
 
 集成:
 > * spring-boot-starter-swagger
